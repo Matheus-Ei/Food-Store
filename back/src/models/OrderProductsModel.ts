@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../core/database";
 
-const ProductsModel = sequelize.define(
-  "products",
+const OrderProductsModel = sequelize.define(
+  "order_products",
 
   {
     id: {
@@ -11,33 +11,33 @@ const ProductsModel = sequelize.define(
       autoIncrement: true,
     },
 
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
 
-    image: {
-      type: DataTypes.TEXT,
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
 
-    description: {
-      type: DataTypes.TEXT,
-    },
-
-    categoryId: {
-      field: "category_id",
+    orderId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       onDelete: "CASCADE",
-      onUpdate: "CASCADE",
       references: {
         key: "id",
-        model: "categories",
+        model: "orders",
+      },
+    },
+
+    productId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      onDelete: "SET NULL",
+      references: {
+        key: "id",
+        model: "products",
       },
     },
   },
@@ -47,4 +47,4 @@ const ProductsModel = sequelize.define(
   },
 );
 
-export default ProductsModel;
+export default OrderProductsModel;
