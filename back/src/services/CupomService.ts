@@ -1,7 +1,7 @@
-import { Product } from "../entities/Product";
-import CurrentModel from "../models/ProductsModel";
+import { Cupom } from "../entities/Cupom";
+import CurrentModel from "../models/CupomsModel";
 
-export class ProductService {
+export class CupomService {
   static get = async (id: number) => {
     return await CurrentModel.findOne({ where: { id } });
   };
@@ -10,11 +10,11 @@ export class ProductService {
     return await CurrentModel.findAll();
   };
 
-  static create = async (data: Omit<Product, "id">) => {
+  static create = async (data: Omit<Cupom, "id">) => {
     return await CurrentModel.create(data);
   };
 
-  static update = async (id: number, data: Partial<Product>) => {
+  static update = async (id: number, data: Partial<Cupom>) => {
     await CurrentModel.update(data, { where: { id } });
     return await CurrentModel.findOne({ where: { id } });
   };

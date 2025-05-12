@@ -14,6 +14,7 @@ const PaymentsModel = sequelize.define(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: false,
     },
   },
 
