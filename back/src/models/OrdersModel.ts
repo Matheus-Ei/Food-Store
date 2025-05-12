@@ -52,7 +52,7 @@ const OrdersModel = sequelize.define(
       allowNull: false,
       references: {
         key: "id",
-        model: "address",
+        model: "addresses",
       },
     },
 

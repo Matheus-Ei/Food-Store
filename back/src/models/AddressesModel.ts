@@ -39,7 +39,7 @@ const AddressesModel = sequelize.define(
 
     userId: {
       field: "user_id",
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         key: "id",

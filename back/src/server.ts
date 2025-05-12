@@ -9,7 +9,7 @@ class Server {
 
   constructor() {
     this.middlewares();
-    // this.models();
+    this.models();
     this.routes();
   }
 
