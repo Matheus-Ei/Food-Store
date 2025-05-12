@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { BaseService } from "../services/BaseService";
+import { ProductService } from "../services/ProductService";
 import { Res } from "../utils/response";
 
-export class BaseController {
+export class ProductController {
   static get = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     try {
-      const resource = BaseService.get(Number(id));
+      const resource = ProductService.get(Number(id));
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {
@@ -17,7 +17,7 @@ export class BaseController {
 
   static getAll = async (_: Request, res: Response) => {
     try {
-      const resource = BaseService.getAll();
+      const resource = ProductService.getAll();
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {
@@ -29,7 +29,7 @@ export class BaseController {
     const data = req.body;
 
     try {
-      const resource = await BaseService.create(data);
+      const resource = await ProductService.create(data);
 
       return Res.sendByType(res, "created", undefined, resource);
     } catch (error) {
@@ -42,7 +42,7 @@ export class BaseController {
     const data = req.body;
 
     try {
-      const resource = await BaseService.update(Number(id), data);
+      const resource = await ProductService.update(Number(id), data);
 
       return Res.sendByType(res, "updated", undefined, resource);
     } catch (error) {
@@ -54,7 +54,7 @@ export class BaseController {
     try {
       const { id } = req.params;
 
-      await BaseService.destroy(Number(id));
+      await ProductService.destroy(Number(id));
 
       return Res.sendByType(res, "deleted");
     } catch (error) {

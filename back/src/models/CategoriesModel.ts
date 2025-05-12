@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../core/database";
 
-const BaseModel = sequelize.define(
-  "bases",
+const CategoriesModel = sequelize.define(
+  "categories",
 
   {
     id: {
@@ -22,4 +22,4 @@ const BaseModel = sequelize.define(
   },
 );
 
-export default BaseModel;
+export default CategoriesModel;

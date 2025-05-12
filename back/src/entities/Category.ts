@@ -1,3 +1,3 @@
-export class Base {
+export class Category {
   constructor(public name: string) {}
 }

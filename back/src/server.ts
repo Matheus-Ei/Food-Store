@@ -35,7 +35,6 @@ class Server {
     return models();
   };
 
-
   listen = () => {
     this.app.listen(ENV.SERVER_PORT, () => {
       console.clear();

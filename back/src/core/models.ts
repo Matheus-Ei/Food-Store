@@ -1,6 +1,8 @@
-import BaseModel from "../models/BaseModel";
+import CategoriesModel from "../models/CategoriesModel";
+import ProductsModel from "../models/ProductsModel";
 
 // The order matters here
 export const models = async () => {
-  await BaseModel.sync({ force: true });
+  await CategoriesModel.sync({ force: true });
+  await ProductsModel.sync({ force: true });
 };

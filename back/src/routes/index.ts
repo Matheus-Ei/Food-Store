@@ -1,6 +1,8 @@
 import { Application } from "express";
-import { BaseRoute } from "./BaseRoute";
+import { CategoryRoute } from "./CategoryRoute";
+import { ProductRoute } from "./ProductRoute";
 
 export const routes = (app: Application) => {
-  BaseRoute.init(app);
+  CategoryRoute.init(app);
+  ProductRoute.init(app);
 };
