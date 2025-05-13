@@ -7,7 +7,7 @@ export class CupomController {
     const { id } = req.params;
 
     try {
-      const resource = CupomService.get(Number(id));
+      const resource = await CupomService.get(Number(id));
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {
@@ -17,7 +17,7 @@ export class CupomController {
 
   static getAll = async (_: Request, res: Response) => {
     try {
-      const resource = CupomService.getAll();
+      const resource = await CupomService.getAll();
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {

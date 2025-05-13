@@ -7,7 +7,7 @@ export class ProductController {
     const { id } = req.params;
 
     try {
-      const resource = ProductService.get(Number(id));
+      const resource = await ProductService.get(Number(id));
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {
@@ -17,7 +17,7 @@ export class ProductController {
 
   static getAll = async (_: Request, res: Response) => {
     try {
-      const resource = ProductService.getAll();
+      const resource = await ProductService.getAll();
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {

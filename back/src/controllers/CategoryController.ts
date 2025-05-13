@@ -7,7 +7,7 @@ export class CategoryController {
     const { id } = req.params;
 
     try {
-      const resource = CategoryService.get(Number(id));
+      const resource = await CategoryService.get(Number(id));
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {
@@ -17,7 +17,7 @@ export class CategoryController {
 
   static getAll = async (_: Request, res: Response) => {
     try {
-      const resource = CategoryService.getAll();
+      const resource = await CategoryService.getAll();
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {

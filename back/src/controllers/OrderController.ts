@@ -7,7 +7,7 @@ export class OrderController {
     const { id } = req.params;
 
     try {
-      const resource = OrderService.get(Number(id));
+      const resource = await OrderService.get(Number(id));
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {
@@ -17,7 +17,7 @@ export class OrderController {
 
   static getAll = async (_: Request, res: Response) => {
     try {
-      const resource = OrderService.getAll();
+      const resource = await OrderService.getAll();
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {

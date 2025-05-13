@@ -7,7 +7,7 @@ export class AddressController {
     const { id } = req.params;
 
     try {
-      const resource = AddressService.get(Number(id));
+      const resource = await AddressService.get(Number(id));
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {
@@ -17,7 +17,7 @@ export class AddressController {
 
   static getAll = async (_: Request, res: Response) => {
     try {
-      const resource = AddressService.getAll();
+      const resource = await AddressService.getAll();
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {

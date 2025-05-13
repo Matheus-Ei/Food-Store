@@ -17,17 +17,20 @@ const UsersModel = sequelize.define(
     },
 
     phone: {
+      unique: true,
       type: DataTypes.STRING,
     },
 
     email: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false,
     },
 
     username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
 
     password: {

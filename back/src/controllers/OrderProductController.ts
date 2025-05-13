@@ -4,10 +4,10 @@ import { Res } from "../utils/response";
 
 export class OrderProductController {
   static get = async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const { orderId, productId } = req.params;
 
     try {
-      const resource = OrderProductService.get(Number(id));
+      const resource = await OrderProductService.get(Number(orderId), Number(productId));
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {
@@ -15,9 +15,11 @@ export class OrderProductController {
     }
   };
 
-  static getAll = async (_: Request, res: Response) => {
+  static getAll = async (req: Request, res: Response) => {
+    const {orderId} = req.params;
+
     try {
-      const resource = OrderProductService.getAll();
+      const resource = await OrderProductService.getAll(Number(orderId));
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {
@@ -38,11 +40,11 @@ export class OrderProductController {
   };
 
   static update = async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const { orderId, productId } = req.params;
     const data = req.body;
 
     try {
-      const resource = await OrderProductService.update(Number(id), data);
+      const resource = await OrderProductService.update(Number(orderId), Number(productId), data);
 
       return Res.sendByType(res, "updated", undefined, resource);
     } catch (error) {
@@ -52,9 +54,9 @@ export class OrderProductController {
 
   static destroy = async (req: Request, res: Response) => {
     try {
-      const { id } = req.params;
+      const { orderId, productId } = req.params;
 
-      await OrderProductService.destroy(Number(id));
+      await OrderProductService.destroy(Number(orderId), Number(productId));
 
       return Res.sendByType(res, "deleted");
     } catch (error) {

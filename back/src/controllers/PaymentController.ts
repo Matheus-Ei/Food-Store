@@ -7,7 +7,7 @@ export class PaymentController {
     const { id } = req.params;
 
     try {
-      const resource = PaymentService.get(Number(id));
+      const resource = await PaymentService.get(Number(id));
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {
@@ -17,7 +17,7 @@ export class PaymentController {
 
   static getAll = async (_: Request, res: Response) => {
     try {
-      const resource = PaymentService.getAll();
+      const resource = await PaymentService.getAll();
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {

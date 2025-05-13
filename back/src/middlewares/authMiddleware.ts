@@ -9,9 +9,6 @@ export const authMiddleware = (
   next: NextFunction,
 ) => {
   try {
-    const ignorePath = ["/users", "/users/auth"];
-    if (ignorePath.includes(req.path)) return next();
-
     const token = req.headers.authorization as string;
     const stringToken = token.split(" ")[1];
 
