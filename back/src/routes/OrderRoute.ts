@@ -8,7 +8,7 @@ export class OrderRoute {
   static init = (app: Application) => {
     app.post(
       "/orders",
-      roleMiddleware(["admin"]),
+      roleMiddleware(["admin", "client"]),
       authMiddleware,
       OrderController.create,
     );
@@ -17,7 +17,7 @@ export class OrderRoute {
 
     app.delete(
       "/orders/:id",
-      roleMiddleware(["admin"]),
+      roleMiddleware(["admin", "client"]),
       authMiddleware,
       OrderController.destroy,
     );
@@ -34,14 +34,14 @@ export class OrderRoute {
     // Order products
     app.post(
       "/orders/:orderId/products",
-      roleMiddleware(["admin"]),
+      roleMiddleware(["admin", "client"]),
       authMiddleware,
       OrderProductController.create,
     );
 
     app.patch(
       "/orders/:orderId/products/:productId",
-      roleMiddleware(["admin"]),
+      roleMiddleware(["admin", "client"]),
       authMiddleware,
       OrderProductController.update,
     );
@@ -51,13 +51,6 @@ export class OrderRoute {
       roleMiddleware(["admin"]),
       authMiddleware,
       OrderProductController.destroy,
-    );
-
-    app.get(
-      "/orders/:orderId/products/:productId",
-      roleMiddleware(["admin"]),
-      authMiddleware,
-      OrderProductController.get,
     );
 
     app.get(
