@@ -28,7 +28,6 @@ export class UserController {
     }
   };
 
-
   static getAll = async (_: Request, res: Response) => {
     try {
       const resource = await UserService.getAll();

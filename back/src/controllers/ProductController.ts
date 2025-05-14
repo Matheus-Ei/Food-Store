@@ -25,6 +25,18 @@ export class ProductController {
     }
   };
 
+  static getByCategory = async (req: Request, res: Response) => {
+    const { categoryId } = req.params;
+
+    try {
+      const resource = await ProductService.getByCategory(Number(categoryId));
+
+      return Res.sendByType(res, "found", undefined, resource);
+    } catch (error) {
+      return Res.sendByType(res, "internalError", error);
+    }
+  };
+
   static create = async (req: Request, res: Response) => {
     const data = req.body;
 

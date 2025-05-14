@@ -3,13 +3,14 @@ import { routes } from "./routes";
 import { ENV } from "./core/enviroment";
 import cors from "cors";
 import { models } from "./core/models";
+import fileUpload from "express-fileupload";
 
 class Server {
   public app: Application = express();
 
   constructor() {
     this.middlewares();
-    this.models();
+    // this.models();
     this.routes();
   }
 
@@ -25,6 +26,17 @@ class Server {
     this.app.use(express.json({ limit: "50mb" }));
 
     this.app.use(express.urlencoded({ extended: true, limit: "50mb" }));
+
+    this.app.use(
+      fileUpload({
+        createParentPath: true,
+        safeFileNames: true,
+        preserveExtension: true,
+        uriDecodeFileNames: true,
+        debug: true,
+        limits: { fileSize: 50 * 1024 * 1024 },
+      }),
+    );
   };
 
   routes = () => {

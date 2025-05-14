@@ -25,6 +25,18 @@ export class AddressController {
     }
   };
 
+  static getByUser = async (req: Request, res: Response) => {
+    const { userId } = req.params;
+
+    try {
+      const resource = await AddressService.getByUser(Number(userId));
+
+      return Res.sendByType(res, "found", undefined, resource);
+    } catch (error) {
+      return Res.sendByType(res, "internalError", error);
+    }
+  };
+
   static create = async (req: Request, res: Response) => {
     const data = req.body;
 

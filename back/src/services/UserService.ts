@@ -18,12 +18,12 @@ export class UserService {
 
     if (!user) return false;
 
-    const isMatch = await Hash.compare(password, user.getDataValue('password'));
+    const isMatch = await Hash.compare(password, user.getDataValue("password"));
 
     let token = null;
     if (isMatch) {
       token = Token.generate(
-        { id: String(user.getDataValue('id')) },
+        { id: String(user.getDataValue("id")) },
         100000000,
         ENV.ACCESS_SECRET,
       );
@@ -33,9 +33,8 @@ export class UserService {
     return token;
   };
 
-
   static create = async (data: Omit<User, "id">) => {
-    const treatedData = {...data, password: await Hash.make(data.password)}
+    const treatedData = { ...data, password: await Hash.make(data.password) };
     return await CurrentModel.create(treatedData);
   };
 

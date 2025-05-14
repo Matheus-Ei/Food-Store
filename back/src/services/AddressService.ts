@@ -6,6 +6,10 @@ export class AddressService {
     return await CurrentModel.findOne({ where: { id } });
   };
 
+  static getByUser = async (userId: number) => {
+    return await CurrentModel.findAll({ where: { userId } });
+  };
+
   static getAll = async () => {
     return await CurrentModel.findAll();
   };

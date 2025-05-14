@@ -7,7 +7,10 @@ export class OrderProductController {
     const { orderId, productId } = req.params;
 
     try {
-      const resource = await OrderProductService.get(Number(orderId), Number(productId));
+      const resource = await OrderProductService.get(
+        Number(orderId),
+        Number(productId),
+      );
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {
@@ -16,7 +19,7 @@ export class OrderProductController {
   };
 
   static getAll = async (req: Request, res: Response) => {
-    const {orderId} = req.params;
+    const { orderId } = req.params;
 
     try {
       const resource = await OrderProductService.getAll(Number(orderId));
@@ -44,7 +47,11 @@ export class OrderProductController {
     const data = req.body;
 
     try {
-      const resource = await OrderProductService.update(Number(orderId), Number(productId), data);
+      const resource = await OrderProductService.update(
+        Number(orderId),
+        Number(productId),
+        data,
+      );
 
       return Res.sendByType(res, "updated", undefined, resource);
     } catch (error) {

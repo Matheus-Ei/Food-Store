@@ -14,6 +14,7 @@ const CupomsModel = sequelize.define(
     code: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
 
     type: {
@@ -22,7 +23,7 @@ const CupomsModel = sequelize.define(
     },
 
     value: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
 

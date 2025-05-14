@@ -10,6 +10,10 @@ export class ProductService {
     return await CurrentModel.findAll();
   };
 
+  static getByCategory = async (categoryId: number) => {
+    return await CurrentModel.findAll({ where: { categoryId } });
+  };
+
   static create = async (data: Omit<Product, "id">) => {
     return await CurrentModel.create(data);
   };

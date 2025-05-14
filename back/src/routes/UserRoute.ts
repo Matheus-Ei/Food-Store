@@ -1,6 +1,8 @@
 import { Application } from "express";
 import { UserController } from "../controllers/UserController";
 import { authMiddleware } from "../middlewares/authMiddleware";
+import { roleMiddleware } from "../middlewares/roleMiddleware";
+import { AddressController } from "../controllers/AddressController";
 
 export class UserRoute {
   static init = (app: Application) => {
@@ -13,5 +15,11 @@ export class UserRoute {
 
     app.get("/users/:userId", authMiddleware, UserController.get);
 
+    app.get(
+      "/users/:userId/addresses",
+      roleMiddleware(["client", "admin"]),
+      authMiddleware,
+      AddressController.getByUser,
+    );
   };
 }

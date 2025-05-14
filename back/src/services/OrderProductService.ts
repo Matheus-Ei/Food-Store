@@ -7,14 +7,18 @@ export class OrderProductService {
   };
 
   static getAll = async (orderId: number) => {
-    return await CurrentModel.findAll({where: {orderId}});
+    return await CurrentModel.findAll({ where: { orderId } });
   };
 
   static create = async (data: Omit<OrderProduct, "id">) => {
     return await CurrentModel.create(data);
   };
 
-  static update = async (orderId: number, productId: number, data: Partial<OrderProduct>) => {
+  static update = async (
+    orderId: number,
+    productId: number,
+    data: Partial<OrderProduct>,
+  ) => {
     await CurrentModel.update(data, { where: { orderId, productId } });
     return await CurrentModel.findOne({ where: { orderId, productId } });
   };

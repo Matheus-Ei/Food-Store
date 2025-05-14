@@ -15,6 +15,30 @@ export class CupomController {
     }
   };
 
+  static getUses = async (req: Request, res: Response) => {
+    const { code } = req.params;
+
+    try {
+      const resource = await CupomService.getUses(code);
+
+      return Res.sendByType(res, "found", undefined, resource);
+    } catch (error) {
+      return Res.sendByType(res, "internalError", error);
+    }
+  };
+
+  static use = async (req: Request, res: Response) => {
+    const { code } = req.params;
+
+    try {
+      const resource = await CupomService.use(code);
+
+      return Res.sendByType(res, "found", undefined, resource);
+    } catch (error) {
+      return Res.sendByType(res, "internalError", error);
+    }
+  };
+
   static getAll = async (_: Request, res: Response) => {
     try {
       const resource = await CupomService.getAll();

@@ -17,7 +17,7 @@ const ProductsModel = sequelize.define(
     },
 
     price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
 

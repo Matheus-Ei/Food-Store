@@ -1,17 +1,33 @@
 import { Application } from "express";
 import { ProductController } from "../controllers/ProductController";
 import { authMiddleware } from "../middlewares/authMiddleware";
+import { roleMiddleware } from "../middlewares/roleMiddleware";
 
 export class ProductRoute {
   static init = (app: Application) => {
-    app.post("/product", authMiddleware, ProductController.create);
+    app.post(
+      "/products",
+      roleMiddleware(["admin"]),
+      authMiddleware,
+      ProductController.create,
+    );
 
-    app.patch("/product/:id", authMiddleware, ProductController.update);
+    app.patch(
+      "/products/:id",
+      roleMiddleware(["admin"]),
+      authMiddleware,
+      ProductController.update,
+    );
 
-    app.delete("/product/:id", authMiddleware, ProductController.destroy);
+    app.delete(
+      "/products/:id",
+      roleMiddleware(["admin"]),
+      authMiddleware,
+      ProductController.destroy,
+    );
 
-    app.get("/product/:id", ProductController.get);
+    app.get("/products/:id", ProductController.get);
 
-    app.get("/product", ProductController.getAll);
+    app.get("/products", ProductController.getAll);
   };
 }
