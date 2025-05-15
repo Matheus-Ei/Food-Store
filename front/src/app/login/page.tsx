@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useServiceMutation } from "@/hooks/useServiceMutation";
 import { UserService } from "@/services/UserService";
@@ -9,9 +9,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { mutate } = useServiceMutation(() =>
-    UserService.login(email, password),
-  );
+  const { mutate } = useServiceMutation(() => {
+    return UserService.login(email, password);
+  });
 
   return (
     <Flex
@@ -52,7 +52,9 @@ const Login = () => {
         <Card.Footer justifyContent="flex-end">
           <Button variant="outline">Cancel</Button>
 
-          <Button variant="solid" onClick={() => mutate({email, password})}>Login</Button>
+          <Button variant="solid" onClick={() => mutate({ email, password })}>
+            Login
+          </Button>
         </Card.Footer>
       </Card.Root>
     </Flex>

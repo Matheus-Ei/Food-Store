@@ -12,8 +12,8 @@ export class UserService {
     return response?.data.resource;
   };
 
-  static signup = async (user: User) => {
-    const response = await Request.post(`${this.endpoint}/auth`, user);
+  static signup = async (user: Partial<User>) => {
+    const response = await Request.post(`${this.endpoint}`, user);
     return response?.data.resource;
   };
 }
