@@ -1,5 +1,6 @@
 import { User } from "@/entities/User";
 import { Request } from "@/utils/request";
+import {Storage} from "@/utils/storage";
 
 export class UserService {
   static endpoint = "users";
@@ -9,7 +10,11 @@ export class UserService {
       email,
       password,
     });
-    return response?.data.resource;
+
+    const token = await response?.data.resource as string;
+    Storage.set('access_token', token)
+
+    return token;
   };
 
   static signup = async (user: Partial<User>) => {
