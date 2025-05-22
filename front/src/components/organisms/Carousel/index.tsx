@@ -101,7 +101,11 @@ export default function CaptionCarousel({ cards }: CaptionCarouselProps) {
               src={card.image}
               alt={card.title}
               fill
-              style={{ objectFit: "cover", borderRadius: 20, paddingBottom: 40}}
+              style={{
+                objectFit: "cover",
+                borderRadius: 20,
+                paddingBottom: 40,
+              }}
             />
 
             <Container
@@ -111,7 +115,9 @@ export default function CaptionCarousel({ cards }: CaptionCarouselProps) {
               justifyContent="center"
               display={"flex"}
             >
-              <Stack position="absolute"><Heading fontSize={"3xl"}>{card.title}</Heading></Stack>
+              <Stack position="absolute">
+                <Heading fontSize={"3xl"}>{card.title}</Heading>
+              </Stack>
             </Container>
           </Box>
         ))}

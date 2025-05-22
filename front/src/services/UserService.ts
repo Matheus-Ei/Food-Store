@@ -1,6 +1,6 @@
 import { User } from "@/entities/User";
 import { Request } from "@/utils/request";
-import {Storage} from "@/utils/storage";
+import { Storage } from "@/utils/storage";
 
 export class UserService {
   static endpoint = "users";
@@ -11,8 +11,8 @@ export class UserService {
       password,
     });
 
-    const token = await response?.data.resource as string;
-    Storage.set('access_token', token)
+    const token = (await response?.data.resource) as string;
+    Storage.set("access_token", token);
 
     return token;
   };

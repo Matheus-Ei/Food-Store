@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useColorModeValue } from "@/components/ui/color-mode";
 import { NavItem } from "@/components/organisms/Sidebar/NavItem";
 import { IconType } from "@/components/atoms/icon";
-import Logo from '../../../../assets/logo/logo-500x500.png'
+import Logo from "../../../../assets/logo/logo-500x500.png";
 import Image from "next/image";
 
 export interface LinkItemProps {
@@ -37,11 +37,11 @@ export const SidebarContent: React.FC<SidebarContentProps> = ({
       h="full"
       {...rest}
     >
-      <Flex h="200px" w='full' alignItems="center" justifyContent='center' >
-        <Image src={Logo} alt='Logo' width={150} />
+      <Flex h="200px" w="full" alignItems="center" justifyContent="start" paddingLeft={5}>
+        <Image src={Logo} alt="Logo" width={150}/>
       </Flex>
 
-      <Flex flex="1" h='full' gapY={2} direction='column'>
+      <Flex flex="1" h="full" gapY={2} direction="column">
         {links.map((link) => (
           <NavItem
             key={link.name}

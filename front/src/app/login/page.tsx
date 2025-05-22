@@ -9,10 +9,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { mutate } = useServiceMutation(async () => {
-    const response = await UserService.login(email, password);
-    console.log(response)
-    return response;
+  const { mutate } = useServiceMutation(() => {
+    return UserService.login(email, password);
   });
 
   return (

@@ -1,10 +1,10 @@
 import { Request } from "@/utils/request";
-import {Product} from "@/entities/Product";
+import { Product } from "@/entities/Product";
 
 export class ProductService {
   static endpoint = "products";
 
-  static getAll= async () => {
+  static getAll = async () => {
     const response = await Request.get<Product[]>(`${this.endpoint}/`);
     return response?.data.resource as Product[];
   };

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 
-export const useServiceMutation = (
-  mutationFn: (variables: unknown) => Promise<unknown>,
+export const useServiceMutation = <TData = unknown, TVariables = unknown>(
+  mutationFn: (variables: TVariables) => Promise<TData>,
 ) => {
-  return useMutation({ mutationFn });
+  return useMutation<TData, Error, TVariables>({ mutationFn });
 };

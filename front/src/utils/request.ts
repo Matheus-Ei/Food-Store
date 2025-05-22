@@ -25,7 +25,7 @@ export class Request {
         throw new Error(error.message);
       }
     } else if (error.request) {
-      throw new Error("No response recived");
+      throw new Error("No response received");
     } else {
       throw new Error(error.message);
     }
@@ -37,12 +37,10 @@ export class Request {
     const url = `${this.backendUrl}/${endpoint}`;
 
     try {
-      const response = await axios.get(url, {
+      return await axios.get(url, {
         headers: { Authorization: `Bearer ${Storage.get("access_token")}` },
         withCredentials: true,
       });
-
-      return response;
     } catch (error) {
       this.treatError(error as AxiosError);
     }
@@ -55,14 +53,13 @@ export class Request {
     const url = `${this.backendUrl}/${endpoint}`;
 
     try {
-      const response = await axios.post(url, body, {
+      return await axios.post(url, body, {
         headers: {
           Authorization: `Bearer ${Storage.get("access_token")}`,
           "Content-Type": "multipart/form-data",
         },
         withCredentials: true,
       });
-      return await response.data;
     } catch (error) {
       this.treatError(error as AxiosError);
     }
@@ -72,12 +69,10 @@ export class Request {
     const url = `${this.backendUrl}/${endpoint}`;
 
     try {
-      const response = await axios.delete(url, {
+      return await axios.delete(url, {
         headers: { Authorization: `Bearer ${Storage.get("access_token")}` },
         withCredentials: true,
       });
-
-      return await response.data;
     } catch (error) {
       this.treatError(error as AxiosError);
     }
@@ -90,12 +85,10 @@ export class Request {
     const url = `${this.backendUrl}/${endpoint}`;
 
     try {
-      const response = await axios.put(url, body, {
+      return await axios.put(url, body, {
         headers: { Authorization: `Bearer ${Storage.get("access_token")}` },
         withCredentials: true,
       });
-
-      return await response.data;
     } catch (error) {
       this.treatError(error as AxiosError);
     }
@@ -108,15 +101,13 @@ export class Request {
     const url = `${this.backendUrl}/${endpoint}`;
 
     try {
-      const response = await axios.patch(url, body, {
+      return await axios.patch(url, body, {
         headers: {
           Authorization: `Bearer ${Storage.get("access_token")}`,
           "Content-Type": "multipart/form-data",
         },
         withCredentials: true,
       });
-
-      return await response.data;
     } catch (error) {
       this.treatError(error as AxiosError);
     }
