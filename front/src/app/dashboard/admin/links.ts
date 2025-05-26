@@ -24,6 +24,12 @@ export const links = [
   },
 
   {
+    name: "Addresses",
+    icon: { name: "FaAddressBook", library: "fa6" },
+    href: "/dashboard/admin/address",
+  },
+
+  {
     name: "Orders",
     icon: { name: "FaShoppingCart", library: "fa" },
     href: "/dashboard/admin/orders",

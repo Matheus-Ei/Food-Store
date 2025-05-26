@@ -10,7 +10,11 @@ interface CardGridProps {
 
 export const CardGrid = ({ items }: CardGridProps) => {
   return (
-    <Grid templateColumns={"repeat(auto-fill, minmax(200px, 1fr))"} gap={6} my={4}>
+    <Grid
+      templateColumns={"repeat(auto-fill, minmax(200px, 1fr))"}
+      gap={6}
+      my={4}
+    >
       {items.map((i) => (
         <CardItem key={i.title} {...i} />
       ))}

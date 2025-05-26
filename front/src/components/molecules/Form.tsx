@@ -274,6 +274,7 @@ export const FormObj = ({
             placeholder={placeholder}
             onChange={handleChange}
             id={name}
+            step='any'
           />
         );
     }
@@ -282,7 +283,11 @@ export const FormObj = ({
   return (
     <form onSubmit={handleSubmit}>
       <VStack gap={4} align="stretch">
-        {title && <Text fontWeight='semibold' fontSize='2xl'>{title}</Text>}
+        {title && (
+          <Text fontWeight="semibold" fontSize="2xl">
+            {title}
+          </Text>
+        )}
 
         {fields.map((field) => {
           const fieldError = formErrors[field.name];

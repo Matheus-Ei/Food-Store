@@ -16,7 +16,7 @@ export class UserRoute {
     app.get("/users/:userId", authMiddleware, UserController.get);
 
     app.get(
-      "/users/:userId/addresses",
+      "/users/addresses",
       roleMiddleware(["client", "admin"]),
       authMiddleware,
       AddressController.getByUser,

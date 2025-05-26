@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import { AddressService } from "../services/AddressService";
 import { Res } from "../utils/response";
+import {Token} from "../utils/token";
+import jwt from "jsonwebtoken";
+import {ENV} from "../core/enviroment";
 
 export class AddressController {
   static get = async (req: Request, res: Response) => {
@@ -26,7 +29,14 @@ export class AddressController {
   };
 
   static getByUser = async (req: Request, res: Response) => {
-    const { userId } = req.params;
+    const token = req.headers.authorization as string;
+    const stringToken = token.split(" ")[1];
+
+    const decoded = jwt.verify(stringToken, ENV.ACCESS_SECRET as string) as {
+      id: string;
+    };
+
+    const userId = decoded.id;
 
     try {
       const resource = await AddressService.getByUser(Number(userId));

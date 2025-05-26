@@ -3,35 +3,31 @@
 import { SidebarWithHeader } from "@/components/organisms/Sidebar";
 import { links } from "@/app/dashboard/admin/links";
 import { useServiceQuery } from "@/hooks/useServiceQuery";
-import { ProductService } from "@/services/ProductService";
-import { Product } from "@/entities/Product";
 import { useServiceMutation } from "@/hooks/useServiceMutation";
 import { FormField, FormObj } from "@/components/molecules/Form";
 import { useToaster } from "@/hooks/useToaster";
 import { CardGrid } from "@/components/molecules/CardGrid";
 import { useQueryClient } from "@tanstack/react-query";
+import {OrderService} from "@/services/OrderService";
+import {Order} from "@/entities/Order";
 
-const AdminProducts = () => {
-  const { data: products } = useServiceQuery<Product[]>(ProductService.getAll, [
-    "getAllProducts",
+const AdminOrders = () => {
+  const { data: orders } = useServiceQuery<Order[]>(OrderService.getAll, [
+    "getAllOrders",
   ]);
 
   const queryClient = useQueryClient();
 
   const { mutateAsync: remove } = useServiceMutation(async (variables: {id: number}) => {
-    const response = await ProductService.delete(variables.id);
+    const response = await OrderService.delete(variables.id);
     await queryClient.invalidateQueries();
 
     return response;
   });
 
-  const cards = products?.map((product) => ({
-    imageSrc: product.image,
-    imageAlt: product.name,
-    title: product.name,
-    description: product.description,
-    value: `$${product?.price?.toFixed(2)}`,
-    onDelete: () => remove({id: product.id})
+  const cards = orders?.map((order) => ({
+    title: String(order.id),
+    onDelete: () => remove({id: order.id})
   }));
 
   const {
@@ -40,7 +36,7 @@ const AdminProducts = () => {
     isSuccess,
     isPending,
   } = useServiceMutation(async (variables) => {
-    const response = await ProductService.create(variables as Product);
+    const response = await OrderService.create(variables as Order);
     await queryClient.invalidateQueries();
 
     return response;
@@ -49,11 +45,13 @@ const AdminProducts = () => {
   useToaster(isError, isSuccess, isPending);
 
   const fields: FormField[] = [
-    { name: "name", label: "Name", type: "text" },
-    { name: "price", label: "Price", type: "number" },
-    { name: "description", label: "Description", type: "text" },
-    { name: "image", label: "Image", type: "text" },
-    { name: "categoryId", label: "Category ID", type: "text" },
+    { name: "status", label: "Status", type: "text" },
+    { name: "custumerUserId", label: "Custumer user id", type: "text" },
+    { name: "deliverUserId", label: "Deliver user id", type: "text" },
+    { name: "total", label: "Total", type: "number" },
+    { name: "addressId", label: "Address id", type: "text" },
+    { name: "paymentId", label: "Payment id", type: "text" },
+    { name: "cupomId", label: "Cupom id", type: "text" },
   ];
 
   return (
@@ -61,13 +59,13 @@ const AdminProducts = () => {
       <CardGrid items={cards || []} />
 
       <FormObj
-        title="Create a new product"
+        title="Create a new order"
         fields={fields}
         onSubmit={create}
-        submitButtonLabel="New product"
+        submitButtonLabel="New order"
       />
     </SidebarWithHeader>
   );
 };
 
-export default AdminProducts;
+export default AdminOrders;

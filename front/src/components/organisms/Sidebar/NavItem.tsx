@@ -22,7 +22,7 @@ export const NavItem: React.FC<NavItemProps> = ({
       role="group"
       cursor="pointer"
       _hover={{
-        bg: "green.600",
+        bg: "red.600",
         color: "white",
       }}
       {...rest}

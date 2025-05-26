@@ -8,7 +8,7 @@ export const useToaster = (
   options?: { error?: string; success?: string },
 ) => {
   useEffect(() => {
-    if(isPending) return;
+    if (isPending) return;
 
     if (isError) {
       toaster.create({

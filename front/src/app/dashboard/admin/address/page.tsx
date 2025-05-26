@@ -2,22 +2,21 @@
 
 import { SidebarWithHeader } from "@/components/organisms/Sidebar";
 import { links } from "@/app/dashboard/admin/links";
-import { Product } from "@/entities/Product";
 import { useServiceMutation } from "@/hooks/useServiceMutation";
 import { FormField, FormObj } from "@/components/molecules/Form";
-import { CategoryService } from "@/services/CategoryService";
 import { useServiceQuery } from "@/hooks/useServiceQuery";
-import { Category } from "@/entities/Category";
 import { useToaster } from "@/hooks/useToaster";
 import { useQueryClient } from "@tanstack/react-query";
 import { CardGrid } from "@/components/molecules/CardGrid";
+import { AddressService } from "@/services/AddressService";
+import { Address } from "@/entities/Address";
 
-const AdminCategories = () => {
+const AdminAddress = () => {
   const queryClient = useQueryClient();
 
   const { mutate: remove } = useServiceMutation(
     async (variables: { id: number }) => {
-      const response = await CategoryService.delete(variables?.id);
+      const response = await AddressService.delete(variables?.id);
 
       await queryClient.invalidateQueries();
 
@@ -31,30 +30,37 @@ const AdminCategories = () => {
     isError,
     isSuccess,
   } = useServiceMutation(async (variables) => {
-    const response = await CategoryService.create(variables as Product);
+    const response = await AddressService.create(variables as Address);
 
     await queryClient.invalidateQueries();
 
     return response;
   });
 
-  const { data: categories } = useServiceQuery<Category[]>(
-    CategoryService.getAll,
-    ["getAllCategories"],
+  const { data: addresses } = useServiceQuery<Address[]>(
+    AddressService.getByUser,
+    ["getAllAddresses"],
   );
 
   useToaster(isError, isSuccess, isPending);
 
-  const fields: FormField[] = [{ name: "name", label: "Name", type: "text" }];
+  const fields: FormField[] = [
+      { name: "state", label: "State", type: "text" },
+      { name: "city", label: "City", type: "text" },
+      { name: "street", label: "Street", type: "text" },
+      { name: "district", label: "District", type: "text" },
+      { name: "zipCode", label: "ZipCode", type: "text" },
+      { name: "userId", label: "User id", type: "number" },
+  ];
 
   return (
     <SidebarWithHeader links={links}>
       <CardGrid
         items={
-          categories?.map((c) => {
+          addresses?.map((a) => {
             return {
-              title: c.name,
-              onDelete: () => remove({ id: c.id }),
+              title: String(a.id),
+              onDelete: () => remove({ id: a.id }),
             };
           }) || []
         }
@@ -63,10 +69,10 @@ const AdminCategories = () => {
       <FormObj
         fields={fields}
         onSubmit={create}
-        submitButtonLabel="New category"
+        submitButtonLabel="New address"
       />
     </SidebarWithHeader>
   );
 };
 
-export default AdminCategories;
+export default AdminAddress;

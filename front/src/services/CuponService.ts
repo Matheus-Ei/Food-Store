@@ -1,15 +1,15 @@
 import { Request } from "@/utils/request";
-import { Product } from "@/entities/Product";
+import { Cupon } from "@/entities/Cupon";
 
-export class ProductService {
-  static endpoint = "products";
+export class CuponService {
+  static endpoint = "cupoms";
 
   static getAll = async () => {
-    const response = await Request.get<Product[]>(`${this.endpoint}/`);
-    return response?.data.resource as Product[];
+    const response = await Request.get<Cupon[]>(`${this.endpoint}/`);
+    return response?.data.resource as Cupon[];
   };
 
-  static create = async (data: Omit<Product, 'id'>) => {
+  static create = async (data: Omit<Cupon, 'id'>) => {
     const response = await Request.post(`${this.endpoint}/`, data);
     return response?.data.resource;
   };

@@ -37,8 +37,13 @@ export const SidebarContent: React.FC<SidebarContentProps> = ({
       h="full"
       {...rest}
     >
-      <Flex h="200px" w="full" alignItems="center" justifyContent="start" paddingLeft={5}>
-        <Image src={Logo} alt="Logo" width={150}/>
+      <Flex
+        h="200px"
+        w="full"
+        alignItems="center"
+        justifyContent="start"
+      >
+        <Image src={Logo} alt="Logo" />
       </Flex>
 
       <Flex flex="1" h="full" gapY={2} direction="column">
