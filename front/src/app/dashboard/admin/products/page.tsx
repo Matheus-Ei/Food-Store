@@ -18,12 +18,14 @@ const AdminProducts = () => {
 
   const queryClient = useQueryClient();
 
-  const { mutateAsync: remove } = useServiceMutation(async (variables: {id: number}) => {
-    const response = await ProductService.delete(variables.id);
-    await queryClient.invalidateQueries();
+  const { mutateAsync: remove } = useServiceMutation(
+    async (variables: { id: number }) => {
+      const response = await ProductService.delete(variables.id);
+      await queryClient.invalidateQueries();
 
-    return response;
-  });
+      return response;
+    },
+  );
 
   const cards = products?.map((product) => ({
     imageSrc: product.image,
@@ -31,7 +33,7 @@ const AdminProducts = () => {
     title: product.name,
     description: product.description,
     value: `$${product?.price?.toFixed(2)}`,
-    onDelete: () => remove({id: product.id})
+    onDelete: () => remove({ id: product.id }),
   }));
 
   const {
@@ -53,7 +55,7 @@ const AdminProducts = () => {
     { name: "price", label: "Price", type: "number" },
     { name: "description", label: "Description", type: "text" },
     { name: "image", label: "Image", type: "text" },
-    { name: "categoryId", label: "Category ID", type: "text" },
+    { name: "category", label: "Category", type: "text" },
   ];
 
   return (

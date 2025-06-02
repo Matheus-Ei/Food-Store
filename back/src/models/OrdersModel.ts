@@ -14,15 +14,7 @@ const OrdersModel = sequelize.define(
     status: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-
-    total: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-
-    discount: {
-      type: DataTypes.STRING,
+      defaultValue: "Preparing",
     },
 
     custumerUserId: {
@@ -56,20 +48,9 @@ const OrdersModel = sequelize.define(
       },
     },
 
-    paymentId: {
-      type: DataTypes.INTEGER,
-      field: "payment_id",
-      allowNull: false,
-      references: {
-        key: "id",
-        model: "payments",
-      },
-    },
-
     cupomId: {
       type: DataTypes.INTEGER,
       field: "cupom_id",
-      allowNull: false,
       references: {
         key: "id",
         model: "cupoms",

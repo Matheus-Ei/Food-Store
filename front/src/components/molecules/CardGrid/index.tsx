@@ -15,8 +15,8 @@ export const CardGrid = ({ items }: CardGridProps) => {
       gap={6}
       my={4}
     >
-      {items.map((i) => (
-        <CardItem key={i.title} {...i} />
+      {items.map((i, index) => (
+        <CardItem key={`${i.title} - ${index}`} {...i} />
       ))}
     </Grid>
   );

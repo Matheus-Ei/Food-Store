@@ -29,7 +29,10 @@ export class OrderController {
     const data = req.body;
 
     try {
-      const resource = await OrderService.create(data);
+      const resource = await OrderService.create({
+        ...data,
+        accessToken: String(req.headers.authorization).split(" ")[1],
+      });
 
       return Res.sendByType(res, "created", undefined, resource);
     } catch (error) {

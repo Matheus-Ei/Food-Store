@@ -1,11 +1,5 @@
 export const links = [
   {
-    name: "Home",
-    icon: { name: "FaHouse", library: "fa6" },
-    href: "/dashboard/admin/home",
-  },
-
-  {
     name: "Products",
     icon: { name: "MdEmojiFoodBeverage", library: "md" },
     href: "/dashboard/admin/products",

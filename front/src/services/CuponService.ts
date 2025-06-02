@@ -9,7 +9,7 @@ export class CuponService {
     return response?.data.resource as Cupon[];
   };
 
-  static create = async (data: Omit<Cupon, 'id'>) => {
+  static create = async (data: Omit<Cupon, "id">) => {
     const response = await Request.post(`${this.endpoint}/`, data);
     return response?.data.resource;
   };

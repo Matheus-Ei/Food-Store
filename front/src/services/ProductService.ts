@@ -9,13 +9,13 @@ export class ProductService {
     return response?.data.resource as Product[];
   };
 
-  static create = async (data: Omit<Product, 'id'>) => {
+  static create = async (data: Omit<Product, "id">) => {
     const response = await Request.post(`${this.endpoint}/`, data);
     return response?.data.resource;
   };
 
   static get = async (id: number) => {
-    const response = await Request.get(`${this.endpoint}/${id}`);
+    const response = await Request.get<Product>(`${this.endpoint}/${id}`);
     return response?.data.resource;
   };
 

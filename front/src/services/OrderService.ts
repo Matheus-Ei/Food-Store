@@ -1,5 +1,11 @@
 import { Request } from "@/utils/request";
-import {Order} from "@/entities/Order";
+import { Order } from "@/entities/Order";
+import {Product} from "@/entities/Product";
+
+export interface OrderProduct {
+  order: Order
+  products: Product[]
+}
 
 export class OrderService {
   static endpoint = "orders";
@@ -9,14 +15,21 @@ export class OrderService {
     return response?.data.resource as Order[];
   };
 
-  static create = async (data: Omit<Order, 'id'>) => {
+  // eslint-disable-next-line
+  static create = async (data: any) => {
     const response = await Request.post(`${this.endpoint}/`, data);
     return response?.data.resource;
   };
 
-  static get = async (id: number) => {
-    const response = await Request.get(`${this.endpoint}/${id}`);
+  // eslint-disable-next-line
+  static update = async (orderId: number, data: any) => {
+    const response = await Request.patch(`${this.endpoint}/${orderId}`, data);
     return response?.data.resource;
+  };
+
+  static get = async (id: number) => {
+    const response = await Request.get<OrderProduct>(`${this.endpoint}/${id}`);
+    return response?.data.resource as OrderProduct;
   };
 
   static delete = async (id: number) => {

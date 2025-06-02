@@ -3,7 +3,6 @@ import CategoriesModel from "../models/CategoriesModel";
 import CupomsModel from "../models/CupomsModel";
 import OrderProductsModel from "../models/OrderProductsModel";
 import OrdersModel from "../models/OrdersModel";
-import PaymentsModel from "../models/PaymentsModel";
 import ProductsModel from "../models/ProductsModel";
 import UsersModel from "../models/UsersModel";
 
@@ -13,7 +12,6 @@ export const models = async () => {
   await UsersModel.sync({ force: true });
   await AddressesModel.sync({ force: true });
   await CupomsModel.sync({ force: true });
-  await PaymentsModel.sync({ force: true });
   await ProductsModel.sync({ force: true });
   await OrdersModel.sync({ force: true });
   await OrderProductsModel.sync({ force: true });

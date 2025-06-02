@@ -26,10 +26,10 @@ export class ProductController {
   };
 
   static getByCategory = async (req: Request, res: Response) => {
-    const { categoryId } = req.params;
+    const { category } = req.params;
 
     try {
-      const resource = await ProductService.getByCategory(Number(categoryId));
+      const resource = await ProductService.getByCategory(category);
 
       return Res.sendByType(res, "found", undefined, resource);
     } catch (error) {

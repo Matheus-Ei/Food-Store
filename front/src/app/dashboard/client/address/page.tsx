@@ -1,7 +1,7 @@
 "use client";
 
 import { SidebarWithHeader } from "@/components/organisms/Sidebar";
-import { links } from "@/app/dashboard/admin/links";
+import { links } from "@/app/dashboard/client/links";
 import { useServiceMutation } from "@/hooks/useServiceMutation";
 import { FormField, FormObj } from "@/components/molecules/Form";
 import { useServiceQuery } from "@/hooks/useServiceQuery";

@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Input,
   Button,
@@ -15,7 +17,8 @@ import {
   FormErrorMessage,
 } from "@chakra-ui/form-control";
 
-import { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect, ReactNode } from "react";
+import { useColorModeValue } from "@/components/ui/color-mode";
 
 export type FormFieldType =
   | "text"
@@ -26,6 +29,7 @@ export type FormFieldType =
   | "textarea"
   | "select"
   | "checkbox"
+  | "element"
   | "image";
 
 export interface FormFieldOption {
@@ -44,6 +48,7 @@ export interface FormField {
   // eslint-disable-next-line
   validation?: (value: any) => string | null;
   accept?: string;
+  element?: ReactNode;
 }
 
 interface FormObjProps {
@@ -69,6 +74,8 @@ export const FormObj = ({
   const [imagePreviews, setImagePreviews] = useState<Record<string, string>>(
     {},
   );
+
+  const bgColor =useColorModeValue("gray.700", "gray.300")
 
   useEffect(() => {
     // eslint-disable-next-line
@@ -198,7 +205,8 @@ export const FormObj = ({
   };
 
   const renderField = (field: FormField) => {
-    const { name, label, type, placeholder, accept, isRequired } = field;
+    const { name, label, type, placeholder, accept, isRequired, element } =
+      field;
 
     switch (type) {
       case "textarea":
@@ -242,6 +250,34 @@ export const FormObj = ({
         );
       }
 
+      case "select":
+        return (
+          <select
+            name={name}
+            onChange={handleChange}
+            id={name}
+            style={{
+              width: "100%",
+              padding: "0.4rem",
+              borderRadius: "0.375rem",
+              appearance: "none",
+              backgroundColor: bgColor,
+              WebkitAppearance: "none",
+              MozAppearance: "none",
+            }}
+          >
+            {field.options?.map((option) => (
+              <option
+                style={{ width: "100%" }}
+                key={option.value}
+                value={option.value}
+              >
+                {option.label}
+              </option>
+            ))}
+          </select>
+        );
+
       case "image":
         return (
           <Box>
@@ -266,7 +302,10 @@ export const FormObj = ({
           </Box>
         );
 
-      default:
+      case "element":
+        return element;
+
+      case "text":
         return (
           <Input
             type={type}
@@ -274,7 +313,19 @@ export const FormObj = ({
             placeholder={placeholder}
             onChange={handleChange}
             id={name}
-            step='any'
+            step="any"
+          />
+        );
+
+      case "number":
+        return (
+          <Input
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            onChange={handleChange}
+            id={name}
+            step="any"
           />
         );
     }

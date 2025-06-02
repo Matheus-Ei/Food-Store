@@ -30,12 +30,14 @@ const AdminCupons = () => {
     return response;
   });
 
-  const { mutateAsync: remove } = useServiceMutation(async (variables: {id: number}) => {
-    const response = await CuponService.delete(variables.id);
-    await queryClient.invalidateQueries();
+  const { mutateAsync: remove } = useServiceMutation(
+    async (variables: { id: number }) => {
+      const response = await CuponService.delete(variables.id);
+      await queryClient.invalidateQueries();
 
-    return response;
-  });
+      return response;
+    },
+  );
 
   useToaster(isError, isSuccess, isPending);
 

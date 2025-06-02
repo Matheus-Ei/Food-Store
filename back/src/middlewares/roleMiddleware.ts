@@ -4,9 +4,8 @@ import { sequelize } from "../core/database";
 import jwt from "jsonwebtoken";
 import { ENV } from "../core/enviroment";
 
-export const roleMiddleware =
-  (roles: string[]) =>
-  async (req: Request, res: Response, next: NextFunction) => {
+export const roleMiddleware = (roles: string[]) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
     try {
       const token = req.headers.authorization as string;
       const stringToken = token.split(" ")[1];
@@ -16,11 +15,12 @@ export const roleMiddleware =
       };
 
       const user = await sequelize.query(
-        `
-          SELECT id FROM users WHERE id = :userId AND role IN (:roles)
-        `,
+        `SELECT id FROM users WHERE id = :userId AND role IN (:roles)`,
         {
-          replacements: { roles, userId: req.body.userId || req.params.userId || decoded.id },
+          replacements: {
+            roles,
+            userId: req.body.userId || req.params.userId || decoded.id,
+          },
         },
       );
 
@@ -31,3 +31,4 @@ export const roleMiddleware =
       return Res.sendByType(res, "internalError", error);
     }
   };
+};

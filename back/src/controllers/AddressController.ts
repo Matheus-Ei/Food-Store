@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { AddressService } from "../services/AddressService";
 import { Res } from "../utils/response";
-import {Token} from "../utils/token";
+import { Token } from "../utils/token";
 import jwt from "jsonwebtoken";
-import {ENV} from "../core/enviroment";
+import { ENV } from "../core/enviroment";
 
 export class AddressController {
   static get = async (req: Request, res: Response) => {
@@ -51,7 +51,10 @@ export class AddressController {
     const data = req.body;
 
     try {
-      const resource = await AddressService.create(data);
+      const resource = await AddressService.create({
+        ...data,
+        accessToken: String(req.headers.authorization).split(" ")[1],
+      });
 
       return Res.sendByType(res, "created", undefined, resource);
     } catch (error) {

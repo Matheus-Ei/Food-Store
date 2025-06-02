@@ -4,7 +4,7 @@ import { Category } from "@/entities/Category";
 export class CategoryService {
   static endpoint = "categories";
 
-  static create = async (data: Omit<Category, 'id'>) => {
+  static create = async (data: Omit<Category, "id">) => {
     const response = await Request.post(`${this.endpoint}/`, data);
     return response?.data.resource;
   };

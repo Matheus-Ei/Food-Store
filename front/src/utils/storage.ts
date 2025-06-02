@@ -1,9 +1,9 @@
 export class Storage {
-  static get = (key: string) => {
+  static get = <T = unknown>(key: string) => {
     try {
-      return JSON.parse(String(localStorage.getItem(key)));
+      return JSON.parse(String(localStorage.getItem(key))) as T;
     } catch {
-      return localStorage.getItem(key);
+      return localStorage.getItem(key) as T;
     }
   };
 

@@ -37,12 +37,7 @@ export const SidebarContent: React.FC<SidebarContentProps> = ({
       h="full"
       {...rest}
     >
-      <Flex
-        h="200px"
-        w="full"
-        alignItems="center"
-        justifyContent="start"
-      >
+      <Flex h="200px" w="full" alignItems="center" justifyContent="start">
         <Image src={Logo} alt="Logo" />
       </Flex>
 

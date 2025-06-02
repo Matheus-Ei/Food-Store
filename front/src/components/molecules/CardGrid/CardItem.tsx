@@ -1,5 +1,5 @@
 import { Button, Card, Image, Text } from "@chakra-ui/react";
-import { DeleteIcon, EditIcon, ViewIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon, EditIcon, ViewIcon } from "@chakra-ui/icons";
 
 export interface CardItemProps {
   imageSrc?: string;
@@ -9,6 +9,7 @@ export interface CardItemProps {
   value?: string;
   onDelete?: () => unknown;
   onUpdate?: () => unknown;
+  onAdd?: () => unknown;
   onOpen?: () => unknown;
 }
 
@@ -20,6 +21,7 @@ export const CardItem = ({
   value,
   onDelete,
   onUpdate,
+  onAdd,
   onOpen,
 }: CardItemProps) => {
   return (
@@ -45,23 +47,29 @@ export const CardItem = ({
         )}
       </Card.Body>
 
-      {(onDelete || onUpdate || onOpen) && (
+      {(onDelete || onUpdate || onOpen || onAdd) && (
         <Card.Footer>
           {onDelete && (
-            <Button onClick={onDelete} colorScheme="red" size="sm">
+            <Button onClick={onDelete} colorScheme="red" size="xs">
               <DeleteIcon />
             </Button>
           )}
 
           {onUpdate && (
-            <Button onClick={onUpdate} colorScheme="blue" size="sm">
+            <Button onClick={onUpdate} colorScheme="blue" size="xs">
               <EditIcon />
             </Button>
           )}
 
           {onOpen && (
-            <Button onClick={onOpen} colorScheme="green" size="sm">
+            <Button onClick={onOpen} colorScheme="green" size="xs">
               <ViewIcon />
+            </Button>
+          )}
+
+          {onAdd && (
+            <Button onClick={onAdd} colorScheme="green" size="xs">
+              <AddIcon />
             </Button>
           )}
         </Card.Footer>
